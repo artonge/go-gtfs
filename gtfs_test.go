@@ -7,7 +7,7 @@ import (
 )
 
 func TestLoad(t *testing.T) {
-	gtfs, err := Load(path.Join("gtfs_test", "ratp"))
+	gtfs, err := Load(path.Join("gtfs_test", "ratp"), nil)
 	if err != nil {
 		fmt.Println(err)
 		t.Fail()
@@ -23,21 +23,37 @@ func TestLoad(t *testing.T) {
 }
 
 func TestLoadBad(t *testing.T) {
-	_, err := Load(path.Join("gtfs_test", "ratp_bad"))
+	_, err := Load(path.Join("gtfs_test", "ratp_bad"), nil)
 	if err == nil {
 		t.Fail()
 	}
 }
 
 func TestLoadNoDir(t *testing.T) {
-	_, err := Load(path.Join("gtfs_test", "no_dir"))
+	_, err := Load(path.Join("gtfs_test", "no_dir"), nil)
 	if err == nil {
 		t.Fail()
 	}
 }
 
+func TestLoadPartial(t *testing.T) {
+	gtfs, err := Load(path.Join("gtfs_test", "ratp"), map[string]bool{"routes": true})
+	if err != nil {
+		fmt.Println(err)
+		t.Fail()
+	}
+	if len(gtfs.Calendars) != 0 ||
+		len(gtfs.Routes) == 0 ||
+		len(gtfs.Stops) != 0 ||
+		len(gtfs.StopsTimes) != 0 ||
+		len(gtfs.Transfers) != 0 ||
+		len(gtfs.Trips) != 0 {
+		t.Fail()
+	}
+}
+
 func TestLoadSplitted(t *testing.T) {
-	gtfss, err := LoadSplitted(path.Join("gtfs_test", "ratp_splitted"))
+	gtfss, err := LoadSplitted(path.Join("gtfs_test", "ratp_splitted"), nil)
 	if err != nil {
 		fmt.Println(err)
 		t.Fail()
@@ -48,14 +64,14 @@ func TestLoadSplitted(t *testing.T) {
 }
 
 func TestLoadSplittedBad(t *testing.T) {
-	_, err := LoadSplitted(path.Join("gtfs_test", "ratp_splitted_bad"))
+	_, err := LoadSplitted(path.Join("gtfs_test", "ratp_splitted_bad"), nil)
 	if err == nil {
 		t.Fail()
 	}
 }
 
 func TestLoadSplittedNoDir(t *testing.T) {
-	_, err := LoadSplitted(path.Join("gtfs_test", "no_dir"))
+	_, err := LoadSplitted(path.Join("gtfs_test", "no_dir"), nil)
 	if err == nil {
 		t.Fail()
 	}

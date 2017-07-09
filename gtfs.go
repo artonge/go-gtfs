@@ -11,14 +11,20 @@ import (
 
 // Load - load GTFS files
 // @param dirPath: the directory containing the GTFS
+// @param filter:
+// It is possible to partialy load the gtfs files
+// If you don't want to load all the files, add an param to the Load function
+// containing only the files that must be loaded
+// Example:
+// Load("path/to/gtfs", map[string]bool{"routes": true})
 // @return a filled GTFS or an error
-func Load(dirPath string) (*GTFS, error) {
+func Load(dirPath string, filter map[string]bool) (*GTFS, error) {
 	_, err := os.Stat(dirPath)
 	if os.IsNotExist(err) {
 		return nil, fmt.Errorf("Error loading GTFS: directory does not existe")
 	}
 	g := &GTFS{Path: dirPath}
-	err = loadGTFS(g)
+	err = loadGTFS(g, filter)
 	if err != nil {
 		return nil, fmt.Errorf("Error loading GTFS: '%v'\n	==> %v", g.Path, err)
 	}
@@ -28,8 +34,9 @@ func Load(dirPath string) (*GTFS, error) {
 // LoadSplitted - load splitted GTFS files
 // ==> When GTFS are splitted into sub directories
 // @param dirPath: the directory containing the sub GTFSs
+// @param filter: see Load function
 // @return an array of filled GTFS or an error
-func LoadSplitted(dirPath string) ([]*GTFS, error) {
+func LoadSplitted(dirPath string, filter map[string]bool) ([]*GTFS, error) {
 	// Get directory list
 	subDirs, err := ioutil.ReadDir(dirPath)
 	if err != nil {
@@ -44,7 +51,7 @@ func LoadSplitted(dirPath string) ([]*GTFS, error) {
 			continue
 		}
 		GTFSs[i] = &GTFS{Path: path.Join(dirPath, dir.Name())}
-		err := loadGTFS(GTFSs[i])
+		err := loadGTFS(GTFSs[i], filter)
 		if err != nil {
 			return nil, fmt.Errorf("Error loading GTFS: '%v'\n	==> %v", GTFSs[i].Path, err)
 		}
@@ -59,7 +66,7 @@ func LoadSplitted(dirPath string) ([]*GTFS, error) {
 // 	- stops.txt
 // @param g: the GTFS struct that will receive the data
 // @return an error
-func loadGTFS(g *GTFS) error {
+func loadGTFS(g *GTFS, filter map[string]bool) error {
 	// Create a slice of agency to load agency.txt
 	var agencySlice []Agency
 	// List all files that will be loaded and there dest
@@ -74,6 +81,10 @@ func loadGTFS(g *GTFS) error {
 	}
 	// Load the files
 	for file, dest := range filesToLoad {
+		// If filter not nil check if me need to load the current file
+		if filter != nil && !filter[file[:len(file)-4]] {
+			continue
+		}
 		filePath := path.Join(g.Path, file)
 		// If the file does not existe, skip it
 		_, err := os.Stat(filePath)
