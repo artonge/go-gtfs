@@ -1,4 +1,4 @@
-package GTFS
+package gtfs
 
 // GTFS -
 type GTFS struct {

@@ -26,7 +26,7 @@ path/to/gtfs_files
 └── trips.txt
 ```
 ```go
-gtfs, err := Load("path/to/gtfs_files")
+g, err := gtfs.Load("path/to/gtfs_files")
 ```
 
 ## Load a directory containing sub directories containing GTFS files:
@@ -52,7 +52,7 @@ path/to/gtfs_directories
 
 ```
 ```go
-gtfss, err := LoadSplitted("path/to/gtfs_directories")
+gs, err := gtfs.LoadSplitted("path/to/gtfs_directories")
 ```
 
 You can then access the data through the GTFS structure.
