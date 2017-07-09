@@ -13,7 +13,7 @@ Load GTFS files in golang
 `go get github.com/artonge/go-gtfs`
 
 # Examples
-To load one directory containing GTFS files:
+## Load one directory containing GTFS files:
 ```bash
 path/to/gtfs_files
 ├── agency.txt
@@ -29,7 +29,7 @@ path/to/gtfs_files
 gtfs, err := Load("path/to/gtfs_files")
 ```
 
-To load a directory containing sub directories containing GTFS files:
+## Load a directory containing sub directories containing GTFS files:
 ```bash
 path/to/gtfs_directories
 ├── gtfs1
