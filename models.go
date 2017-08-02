@@ -54,8 +54,8 @@ type StopTime struct {
 	StopSeq      string `csv:"stop_sequence"`
 	StopHeadSign string `csv:"stop_headsign"`
 	Shape        int    `csv:"shape_dist_traveled"`
-	Departure    int    `csv:"departure_time"`
-	Arrival      int    `csv:"arrival_time"`
+	Departure    string `csv:"departure_time"`
+	Arrival      string `csv:"arrival_time"`
 }
 
 // Calendar -
