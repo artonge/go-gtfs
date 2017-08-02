@@ -6,7 +6,7 @@ type GTFS struct {
 	Agency     Agency
 	Routes     []Route
 	Stops      []Stop
-	StopsTimes []Stop
+	StopsTimes []StopTime
 	Trips      []Trip
 	Calendars  []Calendar
 	Transfers  []Transfer
