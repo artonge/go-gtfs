@@ -13,6 +13,7 @@ func TestLoad(t *testing.T) {
 		t.Fail()
 	}
 	if len(gtfs.Calendars) == 0 ||
+		len(gtfs.CalendarDates) == 0 ||
 		len(gtfs.Routes) == 0 ||
 		len(gtfs.Stops) == 0 ||
 		len(gtfs.StopsTimes) == 0 ||
@@ -43,6 +44,7 @@ func TestLoadPartial(t *testing.T) {
 		t.Fail()
 	}
 	if len(gtfs.Calendars) != 0 ||
+		len(gtfs.CalendarDates) != 0 ||
 		len(gtfs.Routes) == 0 ||
 		len(gtfs.Stops) != 0 ||
 		len(gtfs.StopsTimes) != 0 ||

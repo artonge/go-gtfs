@@ -71,13 +71,14 @@ func loadGTFS(g *GTFS, filter map[string]bool) error {
 	var agencySlice []Agency
 	// List all files that will be loaded and there dest
 	filesToLoad := map[string]interface{}{
-		"agency.txt":     &agencySlice,
-		"calendar.txt":   &g.Calendars,
-		"routes.txt":     &g.Routes,
-		"stops.txt":      &g.Stops,
-		"stop_times.txt": &g.StopsTimes,
-		"transfers.txt":  &g.Transfers,
-		"trips.txt":      &g.Trips,
+		"agency.txt":         &agencySlice,
+		"calendar.txt":       &g.Calendars,
+		"calendar_dates.txt": &g.CalendarDates,
+		"routes.txt":         &g.Routes,
+		"stops.txt":          &g.Stops,
+		"stop_times.txt":     &g.StopsTimes,
+		"transfers.txt":      &g.Transfers,
+		"trips.txt":          &g.Trips,
 	}
 	// Load the files
 	for file, dest := range filesToLoad {
