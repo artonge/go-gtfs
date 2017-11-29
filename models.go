@@ -2,14 +2,15 @@ package gtfs
 
 // GTFS -
 type GTFS struct {
-	Path       string // The path to the containing directory
-	Agency     Agency
-	Routes     []Route
-	Stops      []Stop
-	StopsTimes []StopTime
-	Trips      []Trip
-	Calendars  []Calendar
-	Transfers  []Transfer
+	Path          string // The path to the containing directory
+	Agency        Agency
+	Routes        []Route
+	Stops         []Stop
+	StopsTimes    []StopTime
+	Trips         []Trip
+	Calendars     []Calendar
+	CalendarDates []CalendarDate
+	Transfers     []Transfer
 }
 
 // Route -
@@ -71,6 +72,13 @@ type Calendar struct {
 	Sunday    int    `csv:"sunday"`
 	Start     string `csv:"start_date"`
 	End       string `csv:"end_date"`
+}
+
+// CalendarDate -
+type CalendarDate struct {
+	ServiceID     string `csv:"service_id"`
+	Date          string `csv:"date"`
+	ExceptionType int    `csv:"exception_type"`
 }
 
 // Transfer -
