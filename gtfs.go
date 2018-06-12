@@ -106,3 +106,44 @@ func loadGTFS(g *GTFS, filter map[string]bool) error {
 	}
 	return nil
 }
+
+// Dump GTFS data to an already existing directory
+// @param g: GTFS struct to dump
+// @param dirPath: Target directory
+// @param filter: same as for load function
+// @return error
+func Dump(g *GTFS, dirPath string, filter map[string]bool) error {
+    _, err := os.Stat(dirPath)
+    if os.IsNotExist(err) {
+        return fmt.Errorf("Error dumping GTFS: target directory doesn't exist")
+    }
+
+    agencySlice := make([]Agency, 1)
+    agencySlice[0] = g.Agency
+
+    files := map[string]interface{}{
+        "agency.txt":         agencySlice,
+		"calendar.txt":       g.Calendars,
+		"calendar_dates.txt": g.CalendarDates,
+		"routes.txt":         g.Routes,
+		"stops.txt":          g.Stops,
+		"stop_times.txt":     g.StopsTimes,
+		"transfers.txt":      g.Transfers,
+		"trips.txt":          g.Trips,
+    }
+    for file, src := range files {
+        if filter != nil && !filter[file[:len(file)-4]] {
+            continue
+        }
+        if src == nil {
+            continue
+        }
+        filePath := path.Join(dirPath, file)
+
+        err := csvtag.DumpToFile(src, filePath)
+        if err != nil {
+            return fmt.Errorf("Error dumping file %v: %v", file, err)
+        }
+    }
+    return err
+}
