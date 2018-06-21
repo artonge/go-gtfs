@@ -147,5 +147,5 @@ func Dump(g *GTFS, dirPath string, filter map[string]bool) error {
 			return fmt.Errorf("Error dumping file %v: %v", file, err)
 		}
 	}
-	return err
+	return nil
 }
