@@ -118,11 +118,8 @@ func Dump(g *GTFS, dirPath string, filter map[string]bool) error {
         return fmt.Errorf("Error dumping GTFS: target directory doesn't exist")
     }
 
-    agencySlice := make([]Agency, 1)
-    agencySlice[0] = g.Agency
-
     files := map[string]interface{}{
-        "agency.txt":         agencySlice,
+        "agency.txt":         []Agency{g.Agency},
 		"calendar.txt":       g.Calendars,
 		"calendar_dates.txt": g.CalendarDates,
 		"routes.txt":         g.Routes,
