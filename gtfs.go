@@ -115,7 +115,7 @@ func loadGTFS(g *GTFS, filter map[string]bool) error {
 func Dump(g *GTFS, dirPath string, filter map[string]bool) error {
 	_, err := os.Stat(dirPath)
 	if os.IsNotExist(err) {
-		return fmt.Errorf("Error dumping GTFS: target directory doesn't exist")
+		os.MkdirAll(dirPath, os.ModeDir)
 	}
 
 	files := map[string]interface{}{
