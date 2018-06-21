@@ -115,7 +115,7 @@ func loadGTFS(g *GTFS, filter map[string]bool) error {
 func Dump(g *GTFS, dirPath string, filter map[string]bool) error {
 	_, err := os.Stat(dirPath)
 	if os.IsNotExist(err) {
-		err = os.MkdirAll(dirPath, os.ModeDir)
+		err = os.MkdirAll(dirPath, os.ModeDir | 0755)
 		if err != nil {
 			return err
 		}
