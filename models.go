@@ -51,13 +51,13 @@ type Stop struct {
 
 // StopTime -
 type StopTime struct {
-	StopID       string `csv:"stop_id"`
-	StopSeq      string `csv:"stop_sequence"`
-	StopHeadSign string `csv:"stop_headsign"`
-	TripID       string `csv:"trip_id"`
-	Shape        int    `csv:"shape_dist_traveled"`
-	Departure    string `csv:"departure_time"`
-	Arrival      string `csv:"arrival_time"`
+	StopID       string  `csv:"stop_id"`
+	StopSeq      string  `csv:"stop_sequence"`
+	StopHeadSign string  `csv:"stop_headsign"`
+	TripID       string  `csv:"trip_id"`
+	Shape        float64 `csv:"shape_dist_traveled"`
+	Departure    string  `csv:"departure_time"`
+	Arrival      string  `csv:"arrival_time"`
 }
 
 // Calendar -
