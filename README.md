@@ -86,6 +86,3 @@ type Route struct {
 
 # Contributions
 Pull requests are welcome ! :)
-
-## TODO
-- [ ] Add `Dump(g *GTFS, file string) error` function to write a GTFS struct to the disk (need go-csv-tag implementation of Dump)   
