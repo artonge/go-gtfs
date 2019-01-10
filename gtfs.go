@@ -21,7 +21,7 @@ import (
 func Load(dirPath string, filter map[string]bool) (*GTFS, error) {
 	_, err := os.Stat(dirPath)
 	if os.IsNotExist(err) {
-		return nil, fmt.Errorf("Error loading GTFS: directory does not existe")
+		return nil, fmt.Errorf("Error loading GTFS: directory does not exist")
 	}
 	g := &GTFS{Path: dirPath}
 	err = loadGTFS(g, filter)
