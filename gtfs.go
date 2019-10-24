@@ -6,7 +6,7 @@ import (
 	"os"
 	"path"
 
-	"github.com/artonge/go-csv-tag"
+	"github.com/artonge/go-csv-tag/v2"
 )
 
 // Load - load GTFS files
@@ -92,10 +92,7 @@ func loadGTFS(g *GTFS, filter map[string]bool) error {
 		if os.IsNotExist(err) {
 			continue
 		}
-		err = csvtag.Load(csvtag.Config{
-			Path: filePath,
-			Dest: dest,
-		})
+		err = csvtag.LoadFromPath(filePath, dest)
 		if err != nil {
 			return fmt.Errorf("Error loading file (%v)\n	==> %v", file, err)
 		}
@@ -115,7 +112,7 @@ func loadGTFS(g *GTFS, filter map[string]bool) error {
 func Dump(g *GTFS, dirPath string, filter map[string]bool) error {
 	_, err := os.Stat(dirPath)
 	if os.IsNotExist(err) {
-		err = os.MkdirAll(dirPath, os.ModeDir | 0755)
+		err = os.MkdirAll(dirPath, os.ModeDir|0755)
 		if err != nil {
 			return err
 		}
@@ -124,14 +121,14 @@ func Dump(g *GTFS, dirPath string, filter map[string]bool) error {
 	}
 
 	files := map[string]interface{}{
-		"agency.txt":			[]Agency{g.Agency},
-		"calendar.txt":			g.Calendars,
-		"calendar_dates.txt": 	g.CalendarDates,
-		"routes.txt":			g.Routes,
-		"stops.txt":			g.Stops,
-		"stop_times.txt":		g.StopsTimes,
-		"transfers.txt":		g.Transfers,
-		"trips.txt":			g.Trips,
+		"agency.txt":         []Agency{g.Agency},
+		"calendar.txt":       g.Calendars,
+		"calendar_dates.txt": g.CalendarDates,
+		"routes.txt":         g.Routes,
+		"stops.txt":          g.Stops,
+		"stop_times.txt":     g.StopsTimes,
+		"transfers.txt":      g.Transfers,
+		"trips.txt":          g.Trips,
 	}
 	for file, src := range files {
 		if filter != nil && !filter[file[:len(file)-4]] {
