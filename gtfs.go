@@ -6,7 +6,7 @@ import (
 	"os"
 	"path"
 
-	"github.com/artonge/go-csv-tag/v2"
+	csvtag "github.com/artonge/go-csv-tag/v2"
 )
 
 // Load - load GTFS files
@@ -67,11 +67,9 @@ func LoadSplitted(dirPath string, filter map[string]bool) ([]*GTFS, error) {
 // @param g: the GTFS struct that will receive the data
 // @return an error
 func loadGTFS(g *GTFS, filter map[string]bool) error {
-	// Create a slice of agency to load agency.txt
-	var agencySlice []Agency
 	// List all files that will be loaded and there dest
 	filesToLoad := map[string]interface{}{
-		"agency.txt":         &agencySlice,
+		"agency.txt":         &g.Agencies,
 		"calendar.txt":       &g.Calendars,
 		"calendar_dates.txt": &g.CalendarDates,
 		"routes.txt":         &g.Routes,
@@ -97,10 +95,7 @@ func loadGTFS(g *GTFS, filter map[string]bool) error {
 			return fmt.Errorf("Error loading file (%v)\n	==> %v", file, err)
 		}
 	}
-	// Put the loaded agency in g.Agency
-	if len(agencySlice) > 0 {
-		g.Agency = agencySlice[0]
-	}
+
 	return nil
 }
 
@@ -121,7 +116,7 @@ func Dump(g *GTFS, dirPath string, filter map[string]bool) error {
 	}
 
 	files := map[string]interface{}{
-		"agency.txt":         []Agency{g.Agency},
+		"agency.txt":         g.Agencies,
 		"calendar.txt":       g.Calendars,
 		"calendar_dates.txt": g.CalendarDates,
 		"routes.txt":         g.Routes,

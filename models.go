@@ -3,7 +3,7 @@ package gtfs
 // GTFS -
 type GTFS struct {
 	Path          string // The path to the containing directory
-	Agency        Agency
+	Agencies      []Agency
 	Routes        []Route
 	Stops         []Stop
 	StopsTimes    []StopTime
