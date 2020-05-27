@@ -96,6 +96,10 @@ func loadGTFS(g *GTFS, filter map[string]bool) error {
 		}
 	}
 
+	if len(g.Agencies) > 0 {
+		g.Agency = g.Agencies[0]
+	}
+
 	return nil
 }
 
@@ -113,6 +117,17 @@ func Dump(g *GTFS, dirPath string, filter map[string]bool) error {
 		}
 	} else if err != nil {
 		return err
+	}
+
+	agencyIsIn := false
+	for _, agency := range g.Agencies {
+		if agency == g.Agency {
+			agencyIsIn = true
+		}
+	}
+
+	if !agencyIsIn {
+		g.Agencies = append(g.Agencies, g.Agency)
 	}
 
 	files := map[string]interface{}{
