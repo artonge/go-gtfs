@@ -22,6 +22,10 @@ func TestLoad(t *testing.T) {
 		len(gtfs.Trips) == 0 {
 		t.Fail()
 	}
+
+	if gtfs.Agencies[0] != gtfs.Agency {
+		t.Fail()
+	}
 }
 
 func TestLoadBad(t *testing.T) {
