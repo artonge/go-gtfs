@@ -12,13 +12,18 @@ func TestLoad(t *testing.T) {
 		fmt.Println(err)
 		t.Fail()
 	}
-	if len(gtfs.Calendars) == 0 ||
+	if len(gtfs.Agencies) == 0 ||
+		len(gtfs.Calendars) == 0 ||
 		len(gtfs.CalendarDates) == 0 ||
 		len(gtfs.Routes) == 0 ||
 		len(gtfs.Stops) == 0 ||
 		len(gtfs.StopsTimes) == 0 ||
 		len(gtfs.Transfers) == 0 ||
 		len(gtfs.Trips) == 0 {
+		t.Fail()
+	}
+
+	if gtfs.Agencies[0] != gtfs.Agency {
 		t.Fail()
 	}
 }
@@ -43,7 +48,8 @@ func TestLoadPartial(t *testing.T) {
 		fmt.Println(err)
 		t.Fail()
 	}
-	if len(gtfs.Calendars) != 0 ||
+	if len(gtfs.Agencies) != 0 ||
+		len(gtfs.Calendars) != 0 ||
 		len(gtfs.CalendarDates) != 0 ||
 		len(gtfs.Routes) == 0 ||
 		len(gtfs.Stops) != 0 ||
