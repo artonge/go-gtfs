@@ -1,14 +1,16 @@
 # go-gtfs
-Load GTFS files in golang
+Load GTFS files in Go.
 
 [![godoc for artonge/go-gtfs](https://godoc.org/github.com/artonge/go-gtfs?status.svg)](http://godoc.org/github.com/artonge/go-gtfs)
 
-[![Build Status](https://travis-ci.org/artonge/go-gtfs.svg?branch=master)](https://travis-ci.org/artonge/go-gtfs)
-![cover.run go](https://cover.run/go/github.com/artonge/go-gtfs.svg)
+![Go](https://github.com/artonge/go-gtfs/workflows/Go/badge.svg)
 [![goreportcard for artonge/go-gtfs](https://goreportcard.com/badge/github.com/artonge/go-gtfs)](https://goreportcard.com/report/artonge/go-gtfs)
 
-[![Sourcegraph for artonge/go-gtfs](https://sourcegraph.com/github.com/artonge/go-gtfs/-/badge.svg)](https://sourcegraph.com/github.com/artonge/go-gtfs?badge)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
+**The project is in maintenance mode.**
+
+It is kept compatible with changes in the Go ecosystem but no new features will be developed. PR could be accepted.
 # Install
 `go get github.com/artonge/go-gtfs`
 
