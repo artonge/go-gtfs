@@ -69,14 +69,22 @@ func LoadSplitted(dirPath string, filter map[string]bool) ([]*GTFS, error) {
 func loadGTFS(g *GTFS, filter map[string]bool) error {
 	// List all files that will be loaded and there dest
 	filesToLoad := map[string]interface{}{
-		"agency.txt":         &g.Agencies,
-		"calendar.txt":       &g.Calendars,
-		"calendar_dates.txt": &g.CalendarDates,
-		"routes.txt":         &g.Routes,
-		"stops.txt":          &g.Stops,
-		"stop_times.txt":     &g.StopsTimes,
-		"transfers.txt":      &g.Transfers,
-		"trips.txt":          &g.Trips,
+		"agency.txt":          &g.Agencies,
+		"attributions.txt":    &g.Attributions,
+		"calendar.txt":        &g.Calendars,
+		"calendar_dates.txt":  &g.CalendarDates,
+		"fare_attributes.txt": &g.FareAttributes,
+		"fare_rules.txt":      &g.FareRules,
+		"feed_info.txt":       &g.FeedInfos,
+		"frequencies.txt":     &g.Frequencies,
+		"levels.txt":          &g.Levels,
+		"routes.txt":          &g.Routes,
+		"pathways.txt":        &g.Pathways,
+		"shapes.txt":          &g.Shapes,
+		"stops.txt":           &g.Stops,
+		"stop_times.txt":      &g.StopsTimes,
+		"transfers.txt":       &g.Transfers,
+		"trips.txt":           &g.Trips,
 	}
 	// Load the files
 	for file, dest := range filesToLoad {
@@ -131,14 +139,22 @@ func Dump(g *GTFS, dirPath string, filter map[string]bool) error {
 	}
 
 	files := map[string]interface{}{
-		"agency.txt":         g.Agencies,
-		"calendar.txt":       g.Calendars,
-		"calendar_dates.txt": g.CalendarDates,
-		"routes.txt":         g.Routes,
-		"stops.txt":          g.Stops,
-		"stop_times.txt":     g.StopsTimes,
-		"transfers.txt":      g.Transfers,
-		"trips.txt":          g.Trips,
+		"agency.txt":          g.Agencies,
+		"attributions.txt":    g.Attributions,
+		"calendar.txt":        g.Calendars,
+		"calendar_dates.txt":  g.CalendarDates,
+		"fare_attributes.txt": g.FareAttributes,
+		"fare_rules.txt":      g.FareRules,
+		"feed_info.txt":       g.FeedInfos,
+		"frequencies.txt":     g.Frequencies,
+		"levels.txt":          g.Levels,
+		"routes.txt":          g.Routes,
+		"pathways.txt":        g.Pathways,
+		"shapes.txt":          g.Shapes,
+		"stops.txt":           g.Stops,
+		"stop_times.txt":      g.StopsTimes,
+		"transfers.txt":       g.Transfers,
+		"trips.txt":           g.Trips,
 	}
 	for file, src := range files {
 		if filter != nil && !filter[file[:len(file)-4]] {
