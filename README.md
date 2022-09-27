@@ -19,9 +19,17 @@ It is kept compatible with changes in the Go ecosystem but no new features will 
 ```bash
 path/to/gtfs_files
 ├── agency.txt
+├── attributions.txt
 ├── calendar_dates.txt
 ├── calendar.txt
+├── fare_attributes.txt
+├── fare_rules.txt
+├── feed_info.txt
+├── frequencies.txt
+├── levels.txt
+├── pathways.txt
 ├── routes.txt
+├── shapes.txt
 ├── stops.txt
 ├── stop_times.txt
 ├── transfers.txt
@@ -35,18 +43,35 @@ g, err := gtfs.Load("path/to/gtfs_files", nil)
 ```bash
 path/to/gtfs_directories
 ├── gtfs1
-│   ├── agency.txt
-│   ├── calendar_dates.txt
-│   ├── routes.txt
-│   ├── stops.txt
-│   ├── stop_times.txt
-│   ├── transfers.txt
-│   └── trips.txt
+│   ├── agency.txt
+│   ├── attributions.txt
+│   ├── calendar_dates.txt
+│   ├── calendar.txt
+│   ├── fare_attributes.txt
+│   ├── fare_rules.txt
+│   ├── feed_info.txt
+│   ├── frequencies.txt
+│   ├── levels.txt
+│   ├── pathways.txt
+│   ├── routes.txt
+│   ├── shapes.txt
+│   ├── stops.txt
+│   ├── stop_times.txt
+│   ├── transfers.txt
+│   └── trips.txt
 └── gtfs2
     ├── agency.txt
+    ├── attributions.txt
     ├── calendar_dates.txt
     ├── calendar.txt
+    ├── fare_attributes.txt
+    ├── fare_rules.txt
+    ├── feed_info.txt
+    ├── frequencies.txt
+    ├── levels.txt
+    ├── pathways.txt
     ├── routes.txt
+    ├── shapes.txt
     ├── stops.txt
     ├── stop_times.txt
     ├── transfers.txt
@@ -61,14 +86,24 @@ You can then access the data through the GTFS structure.
 That structure contains arrays of approriate structures for each files.
 ```go
 type GTFS struct {
-	Path       string // The path to the containing directory
-	Agency     Agency
-	Routes     []Route
-	Stops      []Stop
-	StopsTimes []Stop
-	Trips      []Trip
-	Calendars  []Calendar
-	Transfers  []Transfer
+	Path           string // The path to the containing directory
+	Agency         Agency
+	Agencies       []Agency
+	Attributions   []Attribution
+	Calendars      []Calendar
+	CalendarDates  []CalendarDate
+	FareAttributes []FareAttribute
+	FareRules      []FareRule
+	FeedInfos      []FeedInfo
+	Frequencies    []Frequency
+	Levels         []Level
+	Routes         []Route
+	Pathways       []Pathway
+	Shapes         []Shape
+	Stops          []Stop
+	StopsTimes     []StopTime
+	Trips          []Trip
+	Transfers      []Transfer
 }
 
 type Route struct {
