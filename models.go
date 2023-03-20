@@ -29,8 +29,8 @@ type Route struct {
 	ShortName string `csv:"route_short_name"`
 	LongName  string `csv:"route_long_name"`
 	Type      int    `csv:"route_type"`
-	Desc      string `csv:"route_url"`
-	URL       string `csv:"route_desc"`
+	Desc      string `csv:"route_desc"`
+	URL       string `csv:"route_url"`
 	Color     string `csv:"route_color"`
 	TextColor string `csv:"route_text_color"`
 }
