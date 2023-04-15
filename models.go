@@ -193,6 +193,6 @@ type Shape struct {
 	ID               string  `csv:"shape_id"`
 	PointLatitude    float64 `csv:"shape_pt_lat"`
 	PointLongitude   float64 `csv:"shape_pt_lon"`
-	PointSequence    uint32  `csv:"shape_pt_sequence"`
+	PointSequence    int64   `csv:"shape_pt_sequence"`
 	DistanceTraveled float64 `csv:"shape_dist_traveled"`
 }
